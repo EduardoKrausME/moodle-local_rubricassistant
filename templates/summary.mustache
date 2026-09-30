@@ -1,0 +1,66 @@
+<div class="local-rubricassistant-summary mb-4">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="h5">{{#str}}assignment, local_rubricassistant{{/str}}: {{assignmentname}}</h3>
+            <h4 class="h6 mt-3">{{#str}}statement, local_rubricassistant{{/str}}</h4>
+            <div class="local-rubricassistant-text">{{statement}}</div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="h5">{{#str}}competencies, local_rubricassistant{{/str}}</h3>
+            {{#hascompetencies}}
+                <ul class="mb-0">
+                    {{#competencies}}
+                        <li><strong>{{shortname}}</strong>{{#idnumber}} <span class="text-muted">({{idnumber}})</span>{{/idnumber}}{{#description}} — {{description}}{{/description}}</li>
+                    {{/competencies}}
+                </ul>
+            {{/hascompetencies}}
+            {{^hascompetencies}}
+                <p class="text-muted mb-0">{{#str}}nocompetencies, local_rubricassistant{{/str}}</p>
+            {{/hascompetencies}}
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="h5">{{#str}}summary, local_rubricassistant{{/str}}</h3>
+            <p><strong>{{#str}}currentmethod, local_rubricassistant{{/str}}:</strong> {{activemethod}}</p>
+            {{#unsupported}}
+                <div class="alert alert-warning mb-3">{{#str}}unsupportedmethod, local_rubricassistant{{/str}}</div>
+            {{/unsupported}}
+            {{#hascriteria}}
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{#str}}criterion, local_rubricassistant{{/str}}</th>
+                                <th>{{#str}}maxscore, local_rubricassistant{{/str}}</th>
+                                <th>{{#str}}weight, local_rubricassistant{{/str}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#criteria}}
+                                <tr>
+                                    <td>
+                                        {{#name}}<strong>{{name}}</strong><br>{{/name}}
+                                        {{description}}
+                                        {{#levels}}
+                                            <div class="small text-muted mt-1">{{score}} — {{definition}}</div>
+                                        {{/levels}}
+                                    </td>
+                                    <td>{{maxscore}}</td>
+                                    <td>{{effectiveweight}}%</td>
+                                </tr>
+                            {{/criteria}}
+                        </tbody>
+                    </table>
+                </div>
+            {{/hascriteria}}
+            {{^hascriteria}}
+                <p class="text-muted mb-0">{{#str}}nocriteria, local_rubricassistant{{/str}}</p>
+            {{/hascriteria}}
+        </div>
+    </div>
+</div>
