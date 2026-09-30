@@ -1,0 +1,11 @@
+.local-rubricassistant-text {
+    white-space: pre-wrap;
+}
+
+.local-rubricassistant-score {
+    width: 9rem;
+}
+
+.local-rubricassistant-criterion textarea {
+    resize: vertical;
+}
