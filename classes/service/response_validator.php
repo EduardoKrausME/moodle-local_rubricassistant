@@ -46,7 +46,13 @@ final class response_validator {
         try {
             $data = json_decode(trim($raw), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
-            throw new moodle_exception('invalidairesponse', 'local_rubricassistant', '', get_string('invalidjson', 'local_rubricassistant'), $e->getMessage());
+            throw new moodle_exception(
+                'invalidairesponse',
+                'local_rubricassistant',
+                '',
+                get_string('invalidjson', 'local_rubricassistant'),
+                $e->getMessage()
+            );
         }
 
         if (!is_array($data)
@@ -56,7 +62,12 @@ final class response_validator {
             || !is_array($data['criteria'])
             || !is_array($data['findings'])
             || !is_array($data['alignment'])) {
-            throw new moodle_exception('invalidairesponse', 'local_rubricassistant', '', get_string('invalidjson', 'local_rubricassistant'));
+            throw new moodle_exception(
+                'invalidairesponse',
+                'local_rubricassistant',
+                '',
+                get_string('invalidjson', 'local_rubricassistant')
+            );
         }
 
         if (count($data['criteria']) > 100 || count($data['findings']) > 200 || count($data['alignment']) > 200) {
