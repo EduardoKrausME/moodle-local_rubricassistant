@@ -66,7 +66,7 @@ final class response_validator_test extends advanced_testcase {
      */
     public function test_invalid_json_is_rejected(): void {
         $this->expectException(moodle_exception::class);
-        $fence = str_repeat('`', 3);
+        $fence = str_repeat(chr(96), 3);
         response_validator::decode($fence . 'json {"criteria": []} ' . $fence, 'rubric', 'review');
     }
 
