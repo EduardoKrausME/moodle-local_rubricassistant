@@ -38,8 +38,8 @@ final class prompt_builder {
     public static function build(
         string $operation,
         string $method,
-        array  $assignment,
-        array  $existing,
+        array $assignment,
+        array $existing,
         string $objectives,
         string $teachercriteria
     ): array {
