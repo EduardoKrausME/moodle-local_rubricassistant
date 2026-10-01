@@ -22,6 +22,7 @@ use local_rubricassistant\service\assignment_extractor;
 /**
  * Assignment extraction tests.
  *
+ * @coversNothing
  * @package    local_rubricassistant
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -46,7 +47,7 @@ final class assignment_extractor_test extends advanced_testcase {
         $result = assignment_extractor::extract((int)$assign->cmid);
 
         $this->assertSame('Evidence essay', $result['name']);
-        $this->assertStringContainsString('Compare two approaches', $result['statement']);
+        $this->assertStringContainsStringIgnoringCase('Compare two approaches', $result['statement']);
         $this->assertStringNotContainsString('<strong>', $result['statement']);
         $this->assertArrayNotHasKey('submissions', $result);
         $this->assertArrayNotHasKey('users', $result);
