@@ -23,6 +23,7 @@ use moodle_exception;
 /**
  * Tests strict AI response validation.
  *
+ * @coversNothing
  * @package    local_rubricassistant
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
