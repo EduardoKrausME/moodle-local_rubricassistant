@@ -1,35 +1,12 @@
 # Moodle Rubric Assistant
 
-`local_rubricassistant` is a Moodle 4.5+ local plugin that helps teachers create, review and compare advanced grading
+`local_rubricassistant` is a Moodle local plugin that helps teachers create, review and compare advanced grading
 criteria with an assignment. AI is used only to propose and explain changes; the teacher remains responsible for every
 criterion that is finally applied.
 
 The plugin is designed around Moodle's official advanced grading APIs. It supports Rubric (`gradingform_rubric`) as the
 primary method and Marking guide (`gradingform_guide`) when that method is active or selected for a new grading form. It
 does not patch Moodle core and it does not write directly to the grading-form database tables.
-
-## Requirements
-
-- Moodle 4.5 or newer.
-- PHP version supported by the installed Moodle release.
-- `local_ai_bridge` version `2026093001` or newer:
-  https://github.com/EduardoKrausME/moodle-local_ai_bridge/
-- A `local_ai_bridge` purpose with idnumber `rubricassistant-review`, enabled and routed for the teachers who will use
-  the assistant.
-
-`version.php` declares the bridge dependency explicitly:
-
-```php
-$plugin->dependencies = [
-    'local_ai_bridge' => 2026093001,
-];
-```
-
-There are no provider/API-key settings in this plugin. Every AI request goes through:
-
-```php
-\local_ai_bridge\api::generate('rubricassistant-review', $messages);
-```
 
 ## What it does
 
@@ -64,7 +41,7 @@ method automatically.
 
 ## Data sent to AI
 
-Version 1 sends only data needed to design or review the grading form:
+the plugin sends only data needed to design or review the grading form:
 
 - assignment name and statement;
 - linked competencies visible to the current teacher;
@@ -113,23 +90,6 @@ capabilities are still checked independently; the custom capability is not a sho
 `local_ai_bridge` performs its own `local/ai_bridge:use`, tenant, user, purpose, credits and route checks
 when `generate()` is called.
 
-## Installation
-
-Place the plugin at:
-
-```text
-local/rubricassistant
-```
-
-Then run the normal Moodle upgrade process, for example:
-
-```bash
-php admin/cli/upgrade.php
-```
-
-Open an Assignment as a teacher with the required permissions. The activity settings navigation contains **Rubric
-assistant**.
-
 ## Architecture
 
 Important classes are intentionally small and separated by responsibility:
@@ -144,40 +104,3 @@ Important classes are intentionally small and separated by responsibility:
 - `grading_form_writer`: merges accepted criteria and saves through the official Rubric/Marking guide controller APIs.
 
 There are no direct INSERT/UPDATE/DELETE operations against Moodle grading-form tables.
-
-## Tests
-
-The PHPUnit tests cover assignment extraction, existing rubric extraction, draft/schema validation, malformed JSON,
-duplicate criteria, invalid levels, prompt construction without submission data, and permissions.
-
-From a Moodle development checkout with PHPUnit configured:
-
-```bash
-vendor/bin/phpunit --testsuite local_rubricassistant_testsuite
-```
-
-PHP syntax can also be checked independently:
-
-```bash
-find local/rubricassistant -name '*.php' -print0 | xargs -0 -n1 php -l
-```
-
-## CI and Moodle plugin validation
-
-The repository includes `.github/workflows/ci.yml` and `.github/workflows/release.yml`. The CI workflow runs the Moodle
-plugin test matrix and the validator published from:
-
-https://github.com/EduardoKrausME/moodle-plugin-validate
-
-using its documented GitHub Action entry point:
-
-```yaml
-- name: Validate Moodle plugin
-  uses: EduardoKrausME/moodle-plugin-validate@main
-  with:
-    plugin: .
-```
-
-## License
-
-GNU GPL v3 or later.
