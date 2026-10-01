@@ -4,7 +4,7 @@
 criteria with an assignment. AI is used only to propose and explain changes; the teacher remains responsible for every
 criterion that is finally applied.
 
-The plugin is designed around Moodle's official advanced grading APIs. It supports Rubric (`gradingform_rubric`) as the
+The plugin is designed around Moodle's official advanced grading APIs. It uses Rubric (`gradingform_rubric`) as the
 primary method and Marking guide (`gradingform_guide`) when that method is active or selected for a new grading form. It
 does not patch Moodle core and it does not write directly to the grading-form database tables.
 
@@ -35,7 +35,7 @@ Unselected existing criteria are preserved. A proposal that updates one criterio
 form. When a structural Rubric/Marking guide change reaches Moodle's regrading change levels and existing grading
 instances are present, the plugin requires an additional explicit regrading confirmation before saving.
 
-If the advanced grading method changes after the AI draft was generated, the draft cannot be applied. If an unsupported
+If the advanced grading method changes after the AI draft was generated, the draft cannot be applied. If an unhandled
 advanced grading method is already active, the analysis can still be reviewed but this plugin does not switch that
 method automatically.
 
