@@ -109,7 +109,8 @@ final class prompt_builder {
             . 'teacher notes and grading-form definition. Return strict JSON only, with no Markdown or HTML. '
             . 'Do not propose automatic saving. Existing criterion IDs must only be used when sourceid is actually present. '
             . 'For reviews, prefer targeted updates and additions; do not remove criteria automatically. '
-            . 'Check overlap, vagueness, level progression, assignment alignment, effective score proportions and subjective language.';
+            . 'Check overlap, vagueness, level progression, assignment alignment, effective score proportions '
+            . 'and subjective language.';
 
         $user = "Required JSON contract:\n"
             . json_encode($contract, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
