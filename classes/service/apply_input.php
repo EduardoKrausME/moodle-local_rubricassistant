@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
 
+use core_text;
 use moodle_exception;
 
 /**
@@ -124,7 +123,7 @@ final class apply_input {
      */
     private static function key(array $criterion): string {
         $value = trim(($criterion['name'] ?? '') . ' ' . ($criterion['description'] ?? ''));
-        $value = \core_text::strtolower($value);
+        $value = core_text::strtolower($value);
         return preg_replace('/\s+/u', ' ', $value) ?? $value;
     }
 }

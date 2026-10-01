@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant;
+
+use advanced_testcase;
+use context_module;
+use required_capability_exception;
 
 /**
  * Permission tests.
@@ -25,7 +27,7 @@ namespace local_rubricassistant;
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class access_test extends \advanced_testcase {
+final class access_test extends advanced_testcase {
     /**
      * All required capabilities are mandatory in the module context.
      *
@@ -36,7 +38,7 @@ final class access_test extends \advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $assign = $this->getDataGenerator()->create_module('assign', ['course' => $course->id]);
         $user = $this->getDataGenerator()->create_user();
-        $context = \context_module::instance((int)$assign->cmid);
+        $context = context_module::instance((int)$assign->cmid);
         $roleid = create_role('Rubric reviewer', 'rubricreviewer', 'Test role');
         role_assign($roleid, $user->id, $context->id);
         $this->setUser($user);
@@ -44,11 +46,11 @@ final class access_test extends \advanced_testcase {
         $this->assertFalse(access::can_use($context));
 
         foreach ([
-            'local/rubricassistant:use',
-            'moodle/grade:managegradingforms',
-            'moodle/course:manageactivities',
-            'mod/assign:grade',
-        ] as $capability) {
+                     'local/rubricassistant:use',
+                     'moodle/grade:managegradingforms',
+                     'moodle/course:manageactivities',
+                     'mod/assign:grade',
+                 ] as $capability) {
             assign_capability($capability, CAP_ALLOW, $roleid, $context->id);
         }
         accesslib_clear_all_caches_for_unit_testing();
@@ -67,9 +69,9 @@ final class access_test extends \advanced_testcase {
         $assign = $this->getDataGenerator()->create_module('assign', ['course' => $course->id]);
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
-        $context = \context_module::instance((int)$assign->cmid);
+        $context = context_module::instance((int)$assign->cmid);
 
-        $this->expectException(\required_capability_exception::class);
+        $this->expectException(required_capability_exception::class);
         access::require_use($context);
     }
 }

@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
+
+use core_text;
 
 /**
  * Plain-text sanitization helpers.
@@ -45,8 +45,8 @@ final class sanitizer {
         $text = clean_param($text, PARAM_TEXT);
         $text = trim($text);
 
-        if (\core_text::strlen($text) > $maxlength) {
-            $text = \core_text::substr($text, 0, $maxlength);
+        if (core_text::strlen($text) > $maxlength) {
+            $text = core_text::substr($text, 0, $maxlength);
         }
 
         return $text;

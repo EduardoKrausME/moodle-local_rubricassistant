@@ -14,10 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
+/**
+ * apply.php
+ *
+ * @package   local_rubricassistant
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 require_once(__DIR__ . '/../../config.php');
 
+use core\output\notification;
 use local_rubricassistant\access;
 use local_rubricassistant\service\apply_input;
 use local_rubricassistant\service\draft_store;
@@ -44,7 +51,7 @@ try {
 
     $selected = apply_input::selected($draft);
     if (!$selected) {
-        redirect($reviewurl, get_string('nothingselected', 'local_rubricassistant'), null, \core\output\notification::NOTIFY_WARNING);
+        redirect($reviewurl, get_string('nothingselected', 'local_rubricassistant'), null, notification::NOTIFY_WARNING);
     }
 
     $confirmregrade = optional_param('confirmregrade', 0, PARAM_BOOL) === 1;
@@ -55,13 +62,13 @@ try {
         new moodle_url('/local/rubricassistant/index.php', ['cmid' => $cmid]),
         get_string('applied', 'local_rubricassistant'),
         null,
-        \core\output\notification::NOTIFY_SUCCESS
+        notification::NOTIFY_SUCCESS
     );
 } catch (Throwable $e) {
     redirect(
         $reviewurl,
         sanitizer::text($e->getMessage(), 2000),
         null,
-        \core\output\notification::NOTIFY_ERROR
+        notification::NOTIFY_ERROR
     );
 }

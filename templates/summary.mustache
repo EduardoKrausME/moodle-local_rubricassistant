@@ -1,3 +1,27 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_rubricassistant/summary
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
 <div class="local-rubricassistant-summary mb-4">
     <div class="card mb-3">
         <div class="card-body">
@@ -13,7 +37,9 @@
             {{#hascompetencies}}
                 <ul class="mb-0">
                     {{#competencies}}
-                        <li><strong>{{shortname}}</strong>{{#idnumber}} <span class="text-muted">({{idnumber}})</span>{{/idnumber}}{{#description}} — {{description}}{{/description}}</li>
+                        <li><strong>{{shortname}}</strong>{{#idnumber}}
+                            <span class="text-muted">({{idnumber}})</span>{{/idnumber}}{{#description}}
+                            — {{description}}{{/description}}</li>
                     {{/competencies}}
                 </ul>
             {{/hascompetencies}}
@@ -34,26 +60,26 @@
                 <div class="table-responsive">
                     <table class="table table-sm align-middle mb-0">
                         <thead>
-                            <tr>
-                                <th>{{#str}}criterion, local_rubricassistant{{/str}}</th>
-                                <th>{{#str}}maxscore, local_rubricassistant{{/str}}</th>
-                                <th>{{#str}}weight, local_rubricassistant{{/str}}</th>
-                            </tr>
+                        <tr>
+                            <th>{{#str}}criterion, local_rubricassistant{{/str}}</th>
+                            <th>{{#str}}maxscore, local_rubricassistant{{/str}}</th>
+                            <th>{{#str}}weight, local_rubricassistant{{/str}}</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {{#criteria}}
-                                <tr>
-                                    <td>
-                                        {{#name}}<strong>{{name}}</strong><br>{{/name}}
-                                        {{description}}
-                                        {{#levels}}
-                                            <div class="small text-muted mt-1">{{score}} — {{definition}}</div>
-                                        {{/levels}}
-                                    </td>
-                                    <td>{{maxscore}}</td>
-                                    <td>{{effectiveweight}}%</td>
-                                </tr>
-                            {{/criteria}}
+                        {{#criteria}}
+                            <tr>
+                                <td>
+                                    {{#name}}<strong>{{name}}</strong><br>{{/name}}
+                                    {{description}}
+                                    {{#levels}}
+                                        <div class="small text-muted mt-1">{{score}} — {{definition}}</div>
+                                    {{/levels}}
+                                </td>
+                                <td>{{maxscore}}</td>
+                                <td>{{effectiveweight}}%</td>
+                            </tr>
+                        {{/criteria}}
                         </tbody>
                     </table>
                 </div>

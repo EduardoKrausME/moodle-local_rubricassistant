@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant;
 
+use advanced_testcase;
 use local_rubricassistant\service\assignment_extractor;
 
 /**
@@ -27,7 +26,7 @@ use local_rubricassistant\service\assignment_extractor;
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class assignment_extractor_test extends \advanced_testcase {
+final class assignment_extractor_test extends advanced_testcase {
     /**
      * Assignment extraction returns plain text and no submission data.
      *

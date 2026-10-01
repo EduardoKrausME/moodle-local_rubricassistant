@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
 
 /**
@@ -40,8 +38,8 @@ final class prompt_builder {
     public static function build(
         string $operation,
         string $method,
-        array $assignment,
-        array $existing,
+        array  $assignment,
+        array  $existing,
         string $objectives,
         string $teachercriteria
     ): array {

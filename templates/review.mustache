@@ -1,3 +1,27 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_rubricassistant/review
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
 <div class="local-rubricassistant-review">
     <div class="alert alert-info">
         {{#str}}reviewnotice, local_rubricassistant{{/str}}
@@ -12,7 +36,8 @@
             <div class="list-group">
                 {{#findings}}
                     <div class="list-group-item">
-                        <div><strong>{{type}}</strong>{{#severity}} <span class="badge bg-secondary">{{severity}}</span>{{/severity}}</div>
+                        <div><strong>{{type}}</strong>{{#severity}}
+                            <span class="badge bg-secondary">{{severity}}</span>{{/severity}}</div>
                         <div>{{message}}</div>
                     </div>
                 {{/findings}}
@@ -26,7 +51,9 @@
             <div class="list-group">
                 {{#alignment}}
                     <div class="list-group-item">
-                        <div><strong>{{source}}</strong>{{#sourceid}} <span class="text-muted">#{{sourceid}}</span>{{/sourceid}}{{#status}} — {{status}}{{/status}}</div>
+                        <div><strong>{{source}}</strong>{{#sourceid}}
+                            <span class="text-muted">#{{sourceid}}</span>{{/sourceid}}{{#status}}
+                            — {{status}}{{/status}}</div>
                         <div>{{message}}</div>
                     </div>
                 {{/alignment}}
@@ -50,12 +77,16 @@
                         </div>
                         <div class="d-flex flex-wrap gap-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="{{decisionname}}" value="accept" id="{{acceptid}}">
-                                <label class="form-check-label" for="{{acceptid}}">{{#str}}accept, local_rubricassistant{{/str}}</label>
+                                <input class="form-check-input" type="radio" name="{{decisionname}}" value="accept"
+                                       id="{{acceptid}}">
+                                <label class="form-check-label" for="{{acceptid}}">{{#str}}
+                                    accept, local_rubricassistant{{/str}}</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="{{decisionname}}" value="reject" id="{{rejectid}}" checked>
-                                <label class="form-check-label" for="{{rejectid}}">{{#str}}reject, local_rubricassistant{{/str}}</label>
+                                <input class="form-check-input" type="radio" name="{{decisionname}}" value="reject"
+                                       id="{{rejectid}}" checked>
+                                <label class="form-check-label" for="{{rejectid}}">{{#str}}
+                                    reject, local_rubricassistant{{/str}}</label>
                             </div>
                         </div>
                     </div>
@@ -63,9 +94,12 @@
                         {{^isnew}}
                             <div class="local-rubricassistant-current mb-3 p-3 bg-light rounded">
                                 <div class="fw-bold mb-2">{{#str}}current, local_rubricassistant{{/str}}</div>
-                                {{#currentname}}<div><strong>{{currentname}}</strong></div>{{/currentname}}
+                                {{#currentname}}
+                                    <div><strong>{{currentname}}</strong></div>{{/currentname}}
                                 <div>{{currentdescription}}</div>
-                                {{#currentmaxscore}}<div class="small mt-1">{{#str}}maxscore, local_rubricassistant{{/str}}: {{currentmaxscore}}</div>{{/currentmaxscore}}
+                                {{#currentmaxscore}}
+                                    <div class="small mt-1">{{#str}}maxscore, local_rubricassistant{{/str}}
+                                        : {{currentmaxscore}}</div>{{/currentmaxscore}}
                                 {{#currentlevels}}
                                     <div class="small mt-1">{{score}} — {{definition}}</div>
                                 {{/currentlevels}}
@@ -74,36 +108,42 @@
 
                         {{#isguide}}
                             <div class="mb-3">
-                                <label class="form-label" for="{{namename}}">{{#str}}criterionname, local_rubricassistant{{/str}}</label>
-                                <input class="form-control" type="text" id="{{namename}}" name="{{namename}}" value="{{name}}" maxlength="255">
+                                <label class="form-label" for="{{namename}}">{{#str}}
+                                    criterionname, local_rubricassistant{{/str}}</label>
+                                <input class="form-control" type="text" id="{{namename}}" name="{{namename}}"
+                                       value="{{name}}" maxlength="255">
                             </div>
                         {{/isguide}}
 
                         <div class="mb-3">
-                            <label class="form-label" for="{{descriptionname}}">{{#str}}criteriondescription, local_rubricassistant{{/str}}</label>
-                            <textarea class="form-control" id="{{descriptionname}}" name="{{descriptionname}}" rows="3">{{description}}</textarea>
+                            <label class="form-label" for="{{descriptionname}}">{{#str}}
+                                criteriondescription, local_rubricassistant{{/str}}</label>
+                            <textarea class="form-control" id="{{descriptionname}}" name="{{descriptionname}}"
+                                      rows="3">{{description}}</textarea>
                         </div>
 
                         {{#isrubric}}
                             <div class="table-responsive mb-3">
                                 <table class="table table-sm align-middle">
                                     <thead>
-                                        <tr>
-                                            <th>{{#str}}score, local_rubricassistant{{/str}}</th>
-                                            <th>{{#str}}leveldefinition, local_rubricassistant{{/str}}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>{{#str}}score, local_rubricassistant{{/str}}</th>
+                                        <th>{{#str}}leveldefinition, local_rubricassistant{{/str}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        {{#levels}}
-                                            <tr>
-                                                <td class="local-rubricassistant-score">
-                                                    <input class="form-control" type="number" step="any" name="{{scorename}}" value="{{score}}">
-                                                </td>
-                                                <td>
-                                                    <textarea class="form-control" name="{{definitionname}}" rows="2">{{definition}}</textarea>
-                                                </td>
-                                            </tr>
-                                        {{/levels}}
+                                    {{#levels}}
+                                        <tr>
+                                            <td class="local-rubricassistant-score">
+                                                <input class="form-control" type="number" step="any"
+                                                       name="{{scorename}}" value="{{score}}">
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" name="{{definitionname}}"
+                                                          rows="2">{{definition}}</textarea>
+                                            </td>
+                                        </tr>
+                                    {{/levels}}
                                     </tbody>
                                 </table>
                             </div>
@@ -111,17 +151,22 @@
 
                         {{#isguide}}
                             <div class="mb-3">
-                                <label class="form-label" for="{{markersname}}">{{#str}}markers, local_rubricassistant{{/str}}</label>
-                                <textarea class="form-control" id="{{markersname}}" name="{{markersname}}" rows="3">{{markers}}</textarea>
+                                <label class="form-label" for="{{markersname}}">{{#str}}
+                                    markers, local_rubricassistant{{/str}}</label>
+                                <textarea class="form-control" id="{{markersname}}" name="{{markersname}}"
+                                          rows="3">{{markers}}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="{{maxscorename}}">{{#str}}maxscore, local_rubricassistant{{/str}}</label>
-                                <input class="form-control local-rubricassistant-score" type="number" min="0" step="any" id="{{maxscorename}}" name="{{maxscorename}}" value="{{maxscore}}">
+                                <label class="form-label" for="{{maxscorename}}">{{#str}}
+                                    maxscore, local_rubricassistant{{/str}}</label>
+                                <input class="form-control local-rubricassistant-score" type="number" min="0" step="any"
+                                       id="{{maxscorename}}" name="{{maxscorename}}" value="{{maxscore}}">
                             </div>
                         {{/isguide}}
 
                         {{#rationale}}
-                            <div class="small text-muted"><strong>{{#str}}rationale, local_rubricassistant{{/str}}:</strong> {{rationale}}</div>
+                            <div class="small text-muted"><strong>{{#str}}
+                                rationale, local_rubricassistant{{/str}}:</strong> {{rationale}}</div>
                         {{/rationale}}
                     </div>
                 </article>
@@ -130,12 +175,14 @@
             {{#hasactiveinstances}}
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" name="confirmregrade" value="1" id="confirmregrade">
-                    <label class="form-check-label" for="confirmregrade">{{#str}}regradeconfirm, local_rubricassistant{{/str}}</label>
+                    <label class="form-check-label" for="confirmregrade">{{#str}}
+                        regradeconfirm, local_rubricassistant{{/str}}</label>
                 </div>
             {{/hasactiveinstances}}
 
             {{#canapply}}
-                <button type="submit" class="btn btn-primary">{{#str}}applyselected, local_rubricassistant{{/str}}</button>
+                <button type="submit" class="btn btn-primary">{{#str}}
+                    applyselected, local_rubricassistant{{/str}}</button>
             {{/canapply}}
             {{#cannotapply}}
                 <div class="alert alert-warning">{{#str}}cannotapply, local_rubricassistant{{/str}}</div>

@@ -14,12 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
 
 use context_module;
+use gradingform_controller;
+use gradingform_guide_controller;
+use gradingform_rubric_controller;
 use moodle_exception;
+use stdClass;
 
 /**
  * Apply explicitly accepted suggestions through Moodle advanced grading APIs.
@@ -84,7 +86,7 @@ final class grading_form_writer {
     /**
      * Apply rubric changes.
      *
-     * @param \gradingform_rubric_controller $controller Core controller.
+     * @param gradingform_rubric_controller $controller Core controller.
      * @param array $draft Draft.
      * @param array $selected Selected criteria.
      * @param bool $confirmregrade Confirmation.
@@ -96,7 +98,7 @@ final class grading_form_writer {
             $definition = self::new_definition($draft, 'rubric');
             $definition->rubric = [
                 'criteria' => [],
-                'options' => \gradingform_rubric_controller::get_default_options(),
+                'options' => gradingform_rubric_controller::get_default_options(),
             ];
         }
 
@@ -137,7 +139,7 @@ final class grading_form_writer {
         }
 
         $definition->rubric['criteria'] = $criteria;
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
 
         $changelevel = $controller->update_or_check_rubric($definition, null, false);
         if ($controller->has_active_instances() && $changelevel >= 3 && !$confirmregrade) {
@@ -151,7 +153,7 @@ final class grading_form_writer {
     /**
      * Apply marking guide changes.
      *
-     * @param \gradingform_guide_controller $controller Core controller.
+     * @param gradingform_guide_controller $controller Core controller.
      * @param array $draft Draft.
      * @param array $selected Selected criteria.
      * @param bool $confirmregrade Confirmation.
@@ -164,7 +166,7 @@ final class grading_form_writer {
             $definition->guide = [
                 'criteria' => [],
                 'comments' => [],
-                'options' => \gradingform_guide_controller::get_default_options(),
+                'options' => gradingform_guide_controller::get_default_options(),
             ];
         }
 
@@ -194,7 +196,7 @@ final class grading_form_writer {
 
         $definition->guide['criteria'] = $criteria;
         $definition->guide['comments'] = $definition->guide['comments'] ?? [];
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
 
         $changelevel = $controller->update_or_check_guide($definition, null, false);
         if ($controller->has_active_instances() && $changelevel >= 3 && !$confirmregrade) {
@@ -234,10 +236,10 @@ final class grading_form_writer {
      *
      * @param array $draft Draft.
      * @param string $method Method.
-     * @return \stdClass
+     * @return stdClass
      */
-    private static function new_definition(array $draft, string $method): \stdClass {
-        $definition = new \stdClass();
+    private static function new_definition(array $draft, string $method): stdClass {
+        $definition = new stdClass();
         $assignmentname = sanitizer::text($draft['assignment']['name'] ?? '', 180);
         $definition->name = $assignmentname . ' - ' . ($method === 'rubric' ? 'Rubric' : 'Marking guide');
         $definition->description_editor = [
@@ -247,7 +249,7 @@ final class grading_form_writer {
         ];
         $definition->description = '';
         $definition->descriptionformat = FORMAT_PLAIN;
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
         return $definition;
     }
 

@@ -14,14 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant;
 
+use advanced_testcase;
+use context_module;
+use gradingform_controller;
+use gradingform_rubric_controller;
 use local_rubricassistant\service\assignment_extractor;
 use local_rubricassistant\service\basis_fingerprint;
 use local_rubricassistant\service\grading_form_extractor;
 use local_rubricassistant\service\grading_form_writer;
+use stdClass;
 
 /**
  * Human-confirmed grading-form application tests.
@@ -30,7 +33,7 @@ use local_rubricassistant\service\grading_form_writer;
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class grading_form_writer_test extends \advanced_testcase {
+final class grading_form_writer_test extends advanced_testcase {
     /**
      * Applying one accepted update preserves every unselected criterion.
      *
@@ -45,17 +48,17 @@ final class grading_form_writer_test extends \advanced_testcase {
 
         $course = $this->getDataGenerator()->create_course();
         $assign = $this->getDataGenerator()->create_module('assign', ['course' => $course->id, 'grade' => 100]);
-        $context = \context_module::instance((int)$assign->cmid);
+        $context = context_module::instance((int)$assign->cmid);
         $manager = get_grading_manager($context, 'mod_assign', 'submissions');
         $manager->set_active_method('rubric');
         $controller = $manager->get_controller('rubric');
 
-        $definition = new \stdClass();
+        $definition = new stdClass();
         $definition->name = 'Existing rubric';
         $definition->description_editor = ['text' => '', 'format' => FORMAT_PLAIN, 'itemid' => 0];
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
         $definition->rubric = [
-            'options' => \gradingform_rubric_controller::get_default_options(),
+            'options' => gradingform_rubric_controller::get_default_options(),
             'criteria' => [
                 'NEWID1' => $this->rubric_criterion(0, 'Evidence', 'No evidence', 'Strong evidence'),
                 'NEWID2' => $this->rubric_criterion(1, 'Structure', 'Unclear structure', 'Clear structure'),

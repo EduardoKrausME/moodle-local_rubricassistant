@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
 
 use context_module;
+use core_competency\api;
+use stdClass;
 use Throwable;
 
 /**
@@ -61,7 +61,7 @@ final class assignment_extractor {
      * @param context_module $context Context.
      * @return array
      */
-    private static function extract_competencies(\stdClass $cm, context_module $context): array {
+    private static function extract_competencies(stdClass $cm, context_module $context): array {
         if (!class_exists('\\core_competency\\api')) {
             return [];
         }
@@ -74,7 +74,7 @@ final class assignment_extractor {
         }
 
         try {
-            $items = \core_competency\api::list_course_module_competencies_in_course_module($cm);
+            $items = api::list_course_module_competencies_in_course_module($cm);
         } catch (Throwable) {
             return [];
         }

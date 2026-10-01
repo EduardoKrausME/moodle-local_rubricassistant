@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant\service;
 
+use local_ai_bridge\api;
 use moodle_exception;
 
 /**
@@ -44,7 +43,7 @@ final class ai_client {
             throw new moodle_exception('bridgeunavailable', 'local_rubricassistant');
         }
 
-        $response = \local_ai_bridge\api::generate(self::PURPOSE, $messages);
+        $response = api::generate(self::PURPOSE, $messages);
         return response_validator::decode($response->text, $method, $operation);
     }
 }

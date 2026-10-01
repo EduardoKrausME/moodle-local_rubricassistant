@@ -14,11 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant;
 
+use advanced_testcase;
+use context_module;
+use gradingform_controller;
+use gradingform_guide_controller;
+use gradingform_rubric_controller;
 use local_rubricassistant\service\grading_form_extractor;
+use stdClass;
 
 /**
  * Existing grading-form extraction tests.
@@ -27,7 +31,7 @@ use local_rubricassistant\service\grading_form_extractor;
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class grading_form_extractor_test extends \advanced_testcase {
+final class grading_form_extractor_test extends advanced_testcase {
     /**
      * Existing Moodle rubric is read through the advanced grading controller.
      *
@@ -45,19 +49,19 @@ final class grading_form_extractor_test extends \advanced_testcase {
             'course' => $course->id,
             'grade' => 100,
         ]);
-        $context = \context_module::instance((int)$assign->cmid);
+        $context = context_module::instance((int)$assign->cmid);
         $manager = get_grading_manager($context, 'mod_assign', 'submissions');
         $manager->set_active_method('rubric');
         $controller = $manager->get_controller('rubric');
 
-        $definition = new \stdClass();
+        $definition = new stdClass();
         $definition->name = 'Essay rubric';
         $definition->description_editor = ['text' => '', 'format' => FORMAT_PLAIN, 'itemid' => 0];
         $definition->description = '';
         $definition->descriptionformat = FORMAT_PLAIN;
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
         $definition->rubric = [
-            'options' => \gradingform_rubric_controller::get_default_options(),
+            'options' => gradingform_rubric_controller::get_default_options(),
             'criteria' => [
                 'NEWID1' => [
                     'sortorder' => 0,
@@ -108,19 +112,19 @@ final class grading_form_extractor_test extends \advanced_testcase {
             'course' => $course->id,
             'grade' => 100,
         ]);
-        $context = \context_module::instance((int)$assign->cmid);
+        $context = context_module::instance((int)$assign->cmid);
         $manager = get_grading_manager($context, 'mod_assign', 'submissions');
         $manager->set_active_method('guide');
         $controller = $manager->get_controller('guide');
 
-        $definition = new \stdClass();
+        $definition = new stdClass();
         $definition->name = 'Essay guide';
         $definition->description_editor = ['text' => '', 'format' => FORMAT_PLAIN, 'itemid' => 0];
         $definition->description = '';
         $definition->descriptionformat = FORMAT_PLAIN;
-        $definition->status = \gradingform_controller::DEFINITION_STATUS_READY;
+        $definition->status = gradingform_controller::DEFINITION_STATUS_READY;
         $definition->guide = [
-            'options' => \gradingform_guide_controller::get_default_options(),
+            'options' => gradingform_guide_controller::get_default_options(),
             'comments' => [],
             'criteria' => [
                 'NEWID1' => [

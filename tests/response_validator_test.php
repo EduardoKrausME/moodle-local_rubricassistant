@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file is part of Moodle - http://moodle.org/
-
 namespace local_rubricassistant;
 
+use advanced_testcase;
 use local_rubricassistant\service\response_validator;
+use moodle_exception;
 
 /**
  * Tests strict AI response validation.
@@ -27,7 +27,7 @@ use local_rubricassistant\service\response_validator;
  * @copyright  2026 Eduardo Kraus
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class response_validator_test extends \advanced_testcase {
+final class response_validator_test extends advanced_testcase {
     /**
      * A valid rubric draft is normalized and HTML is removed.
      *
@@ -64,7 +64,7 @@ final class response_validator_test extends \advanced_testcase {
      * @return void
      */
     public function test_invalid_json_is_rejected(): void {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(moodle_exception::class);
         response_validator::decode('```json {"criteria": []} ```', 'rubric', 'review');
     }
 
@@ -87,7 +87,7 @@ final class response_validator_test extends \advanced_testcase {
             'alignment' => [],
         ]);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(moodle_exception::class);
         response_validator::decode($raw, 'rubric', 'review');
     }
 
@@ -109,7 +109,7 @@ final class response_validator_test extends \advanced_testcase {
             'alignment' => [],
         ]);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(moodle_exception::class);
         response_validator::decode($raw, 'rubric', 'review');
     }
 
