@@ -16,7 +16,6 @@
 
 namespace local_rubricassistant\service;
 
-use core_text;
 use JsonException;
 use moodle_exception;
 
@@ -39,7 +38,7 @@ final class response_validator {
     public static function decode(string $raw, string $method, string $operation): array {
         if (!in_array($method, ['rubric', 'guide'], true)
             || !in_array($operation, ['create', 'review', 'compare'], true)
-            || core_text::strlen($raw) > 2000000) {
+            || strlen($raw) > 2000000) {
             self::invalid('invalidjson');
         }
 
@@ -84,7 +83,7 @@ final class response_validator {
                 ? self::rubric_criterion($criterion, $index)
                 : self::guide_criterion($criterion, $index);
 
-            $duplicatekey = core_text::strtolower(trim(($clean['name'] ?? '') . ' ' . $clean['description']));
+            $duplicatekey = strtolower(trim(($clean['name'] ?? '') . ' ' . $clean['description']));
             $duplicatekey = preg_replace('/\s+/u', ' ', $duplicatekey) ?? $duplicatekey;
             if (isset($seen[$duplicatekey])) {
                 self::invalid('duplicatecriterion');

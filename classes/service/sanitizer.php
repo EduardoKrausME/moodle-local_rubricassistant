@@ -16,7 +16,6 @@
 
 namespace local_rubricassistant\service;
 
-use core_text;
 
 /**
  * Plain-text sanitization helpers.
@@ -45,8 +44,8 @@ final class sanitizer {
         $text = clean_param($text, PARAM_TEXT);
         $text = trim($text);
 
-        if (core_text::strlen($text) > $maxlength) {
-            $text = core_text::substr($text, 0, $maxlength);
+        if (strlen($text) > $maxlength) {
+            $text = substr($text, 0, $maxlength);
         }
 
         return $text;
